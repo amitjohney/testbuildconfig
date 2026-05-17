@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Environment Variables</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        thead {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fb;
+        }
+
+        tbody tr:hover {
+            background-color: #eef3f7;
+            transition: 0.2s;
+        }
+
+        .env-key {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .env-value {
+            color: #16a085;
+            word-break: break-all;
+        }
+
+        .empty {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+        }
+
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+        .stylish {
+           color: {{ greetcolour | default("red") }}
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="stylish">Good morning!! My Environment Variables</h1>
+
+    <div class="subtitle">
+        Application Demo (Blue Planet)
+    </div>
+
+    {% if env_vars %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Variable Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, value in env_vars.items() %}
+            <tr>
+                <td class="env-key">{{ key }}</td>
+                <td class="env-value">{{ value or "Not Set" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <div class="empty">
+        No environment variables available.
+    </div>
+
+    {% endif %}
+
+    <footer>
+        Rendered using Flask + Jinja2
+    </footer>
+
+</div>
+
+</body>
+</html>
